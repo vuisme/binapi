@@ -1,5 +1,3 @@
-Dưới đây là bản dịch tiếng Anh của tệp README, cùng với một số cải tiến nhỏ về ngôn ngữ và định dạng:
-
 ## BIN Lookup API
 
 This API provides functionality to look up BIN (Bank Identification Number) information from a SQLite database.
