@@ -71,12 +71,6 @@ The API will be running at `http://0.0.0.0:5000`.
 
 ### API Usage
 
-#### Get a list of all BINs
-
-* **Endpoint:** `/api/bins`
-* **Method:** GET
-* **Description:** Returns a list of all BINs in the database.
-
 #### Get information about a specific BIN
 
 * **Endpoint:** `/api/bin/<bin_number>`
