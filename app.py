@@ -10,16 +10,6 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-@app.route('/api/bins', methods=['GET'])
-def get_bins():
-    conn = get_db_connection()
-    bins = conn.execute('SELECT * FROM bin_list').fetchall()
-    conn.close()
-    
-    bins_list = [dict(ix) for ix in bins]
-    
-    return jsonify(bins_list)
-
 @app.route('/api/bin/<string:bin_number>', methods=['GET'])
 def get_bin_by_number(bin_number):
     # Lấy 6 ký tự đầu tiên của bin_number để tìm kiếm
