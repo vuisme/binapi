@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  binbase:
+    image: cpanel10x/binbase:latest
+    ports:
+      - "5979:5000"
+    networks:
+      - tgbot
+    restart: unless-stopped
+
+networks:
+  tgbot:
+    driver: bridge
+
