@@ -13,7 +13,6 @@ This API provides functionality to look up BIN (Bank Identification Number) info
 2. **Database setup:**
 
    * Ensure you have a SQLite database named `bin_list_data.db` in the `/app` directory.
-   * This database should have a table named `bin_list` with a column `BIN` containing the BIN numbers.
 
 ### Running the application
 
@@ -82,9 +81,6 @@ The API will be running at `http://0.0.0.0:5000`.
 ### Examples
 
 ```bash
-# Get all BINs
-curl http://localhost:5000/api/bins
-
 # Get information about BIN 424242
 curl http://localhost:5000/api/bin/424242
 ```
