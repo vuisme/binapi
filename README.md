@@ -23,7 +23,7 @@ python app.py
 
 ## Running with Docker
 
-### 1 Build the Docker image (Option)
+### 1. Build the Docker image (Option)
 Clone project and build
 
 ```bash
