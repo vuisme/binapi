@@ -91,14 +91,19 @@ jobs:
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
-          if [ "${GITHUB_REF_NAME}" == "main" ]; then
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+
+          if [ "$BRANCH_NAME" == "main" ]; then
             LATEST_TAG="-t ${{ env.REGISTRY_IMAGE }}:latest"
           else
             LATEST_TAG=""
           fi
           
+          # Lọc bỏ tag "main" khỏi danh sách
+          FILTERED_TAGS=$(jq -cr '.tags | map(select(. != "main")) | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON")
+          
           docker buildx imagetools create \
-            $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
+            $FILTERED_TAGS \
             $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *) \
             $LATEST_TAG
       
