@@ -2,7 +2,7 @@ name: Build And Push
 
 on:
   push:
-
+    branches: [ "main" ]
 env:
   REGISTRY_IMAGE: cpanel10x/binbase
 
@@ -91,8 +91,16 @@ jobs:
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
-          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
+          if [ "${GITHUB_REF_NAME}" == "main" ]; then
+            LATEST_TAG="-t ${{ env.REGISTRY_IMAGE }}:latest"
+          else
+            LATEST_TAG=""
+          fi
+          
+          docker buildx imagetools create \
+            $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
+            $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *) \
+            $LATEST_TAG
       
       - name: Inspect image
         run: |
