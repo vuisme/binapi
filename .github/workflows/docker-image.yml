@@ -102,7 +102,7 @@ jobs:
             LATEST_TAG="-t ${{ env.REGISTRY_IMAGE }}:latest"
           else
             VERSION_TAG=""
-            LATEST_TAG=""
+            LATEST_TAG="-t ${{ env.REGISTRY_IMAGE }}:latest"
           fi
           
           # Lọc bỏ tag "main" khỏi danh sách
