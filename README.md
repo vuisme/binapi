@@ -1,10 +1,8 @@
-Dưới đây là bản dịch tiếng Anh của tệp README, cùng với một số cải tiến nhỏ về ngôn ngữ và định dạng:
-
 ## BIN Lookup API
 
 This API provides functionality to look up BIN (Bank Identification Number) information from a SQLite database.
 
-### Installation
+### Installation Manual
 
 1. **Install dependencies:**
 
@@ -15,7 +13,6 @@ This API provides functionality to look up BIN (Bank Identification Number) info
 2. **Database setup:**
 
    * Ensure you have a SQLite database named `bin_list_data.db` in the `/app` directory.
-   * This database should have a table named `bin_list` with a column `BIN` containing the BIN numbers.
 
 ### Running the application
 
@@ -23,15 +20,55 @@ This API provides functionality to look up BIN (Bank Identification Number) info
 python app.py
 ```
 
+## Running with Docker
+
+### 1. Build the Docker image (Option)
+Clone project and build
+
+```bash
+docker build -t bin-lookup-api .
+```
+### 2.1 Run with my Build
+
+```bash
+docker run -d -p 5000:5000 --name bin-lookup-container cpanel10x/binbase
+```
+
+### 2.2 Run your build
+
+```bash
+docker run -d -p 5000:5000 --name bin-lookup-container bin-lookup-api
+```
+
+This will start the container in detached mode, map port 5000 from the container to port 5000 on your host machine, and name the container `bin-lookup-container`.
+
+### Additional Docker commands
+
+* **Stop the container:**
+
+  ```bash
+  docker stop bin-lookup-container
+  ```
+
+* **Start the container:**
+
+  ```bash
+  docker start bin-lookup-container
+  ```
+
+* **View container logs:**
+
+  ```bash
+  docker logs bin-lookup-container
+  ```
+
+**Make sure you have Docker installed and running on your machine before following these instructions.**
+
+**Remember to replace `bin-lookup-api` with the actual name you gave your Docker image if it's different.**
+
 The API will be running at `http://0.0.0.0:5000`.
 
 ### API Usage
-
-#### Get a list of all BINs
-
-* **Endpoint:** `/api/bins`
-* **Method:** GET
-* **Description:** Returns a list of all BINs in the database.
 
 #### Get information about a specific BIN
 
@@ -44,11 +81,23 @@ The API will be running at `http://0.0.0.0:5000`.
 ### Examples
 
 ```bash
-# Get all BINs
-curl http://localhost:5000/api/bins
-
 # Get information about BIN 424242
 curl http://localhost:5000/api/bin/424242
+```
+```json
+#get respone json
+{
+    "BIN": 522879,
+    "Brand": "MASTERCARD",
+    "Category": "WORLD",
+    "CountryName": "CANADA",
+    "Issuer": "PRESIDENT'S CHOICE BANK",
+    "IssuerPhone": null,
+    "IssuerUrl": null,
+    "Type": "CREDIT",
+    "isoCode2": "CA",
+    "isoCode3": "CAN"
+}
 ```
 
 ### Notes
