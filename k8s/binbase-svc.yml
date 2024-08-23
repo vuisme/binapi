@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: binbase-svc
+  namespace: ittools
+spec:
+  selector:
+    app: binbase
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: NodePort
+

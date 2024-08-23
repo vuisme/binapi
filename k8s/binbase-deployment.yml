@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: binbase-deployment
+  namespace: ittools
+  labels:
+    app: binbase
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: binbase
+  template:
+    metadata:
+      labels:
+        app: binbase
+    spec:
+      containers:
+        - name: binbase
+          image: cpanel10x/binbase
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          imagePullPolicy: Always
+      restartPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
