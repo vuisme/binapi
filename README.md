@@ -79,18 +79,20 @@ The API will be running at `http://0.0.0.0:5000`.
     * `bin_number` (string): The BIN number to look up.
 
 ### Examples
+Free API Checker: https://binbase.vutn.net/api/bin/<6 number credit card>
 
 ```bash
 # Get information about BIN 424242
-curl http://localhost:5000/api/bin/424242
+curl https://binbase.vutn.net/api/bin/424242
 ```
+Get respone json
 ```json
-#get respone json
 {
     "BIN": 522879,
     "Brand": "MASTERCARD",
     "Category": "WORLD",
     "CountryName": "CANADA",
+    "IsValid": True,
     "Issuer": "PRESIDENT'S CHOICE BANK",
     "IssuerPhone": null,
     "IssuerUrl": null,
